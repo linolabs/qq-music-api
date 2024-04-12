@@ -1,4 +1,7 @@
-//https://nitro.unjs.io/config
+// https://nitro.unjs.io/config
 export default defineNitroConfig({
-  srcDir: "server"
+  srcDir: 'server',
+  typescript: {
+    strict: true,
+  },
 });

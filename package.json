@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "nitro build",
@@ -6,7 +7,14 @@
     "prepare": "nitro prepare",
     "preview": "node .output/server/index.mjs"
   },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
   "devDependencies": {
-    "nitropack": "latest"
+    "@antfu/eslint-config": "^2.12.2",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.0.0",
+    "nitropack": "latest",
+    "typescript": "^5.4.4"
   }
 }
