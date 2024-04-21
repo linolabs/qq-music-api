@@ -1,3 +1,27 @@
-# Nitro starter
+![banner](./.github/assets/banner.png)
 
-Look at the [nitro quick start](https://nitro.unjs.io/guide#quick-start) to learn more how to get started.
+# QQ Music API
+
+## Usage
+
+`GET /api/search/song`
+
+```typescript
+const res = await fetch('/api/search/song',{
+    params:{
+        key:'Search Content Here'
+    }
+})
+
+console.log(await res.json())
+// [
+//     {
+//         mid:'mid string',
+//         name: 'Song Name',
+//         singer: 'Singer Name',
+//         url:'An url'
+//     },
+//     ...
+// ]
+
+```
