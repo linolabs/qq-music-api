@@ -1,6 +1,6 @@
 import type { TStreamResponse } from '~~/types/stream';
 
-export async function getMusicURL(midArray: string[]) {
+async function _getMusicURL(midArray: string[]) {
   const musicBaseURL = env.MUSICU_BASE_URL;
   const guid = Math.round(2147483647 * Math.random()) * Date.now() % 1e10;
   const res = await $fetch<TStreamResponse>(musicBaseURL, {
@@ -54,4 +54,15 @@ export async function getMusicURL(midArray: string[]) {
   for (const item of res.req_1.data.midurlinfo)
     data[item.songmid] = `https://ws.stream.qqmusic.qq.com/${item.filename}?${keyString}&src=${filename}`;
   return data;
+}
+
+export async function getMusicURL(midArray: string[]) {
+  let result: Record<string, string> = {};
+  // split into chunks of 5
+  for (let i = 0; i < midArray.length; i += 5) {
+    const midArrayChunk = midArray.slice(i, i + 5);
+    const data = await _getMusicURL(midArrayChunk);
+    result = { ...result, ...data };
+  }
+  return result;
 }
