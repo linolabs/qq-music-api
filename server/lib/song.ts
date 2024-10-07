@@ -48,13 +48,10 @@ export async function getMusicURL(midArray: string[]) {
     },
   });
   const data: Record<string, string> = {};
+  const [filename, keyString] = res.req_1.data.testfile2g.split('?');
   if (res.code !== 0 || res.req_1.code !== 0)
     throw createError({ message: 'Failed to get music URL', status: 500 });
-  for (const item of res.req_1.data.midurlinfo) {
-    if (!item.purl)
-      data[item.songmid] = '';
-    else
-      data[item.songmid] = `https://ws.stream.qqmusic.qq.com/${item.purl}`;
-  }
+  for (const item of res.req_1.data.midurlinfo)
+    data[item.songmid] = `https://ws.stream.qqmusic.qq.com/${item.filename}?${keyString}&src=${filename}`;
   return data;
 }
